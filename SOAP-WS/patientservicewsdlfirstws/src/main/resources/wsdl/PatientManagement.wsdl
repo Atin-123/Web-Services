@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://www.example.org/PatientManagement/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="PatientManagement"
+	targetNamespace="http://www.example.org/PatientManagement/">
+
+
+	<wsdl:types>
+
+		<xsd:schema
+			targetNamespace="http://www.example.org/PatientManagement/">
+
+			<xsd:complexType name="patientDetails">
+				<xsd:sequence>
+					<xsd:element name="roomNo" type="xsd:string" />
+					<xsd:element name="bedNo" type="xsd:string" />
+					<xsd:element name="admitDate" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="patient">
+				<xsd:sequence>
+					<xsd:element name="id" type="xsd:string" />
+					<xsd:element name="patientDetails"
+						type="tns:patientDetails" />
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="checkPatientRequest">
+				<xsd:sequence>
+					<xsd:element name="patientId" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="checkPatientResponse">
+				<xsd:sequence>
+					<xsd:element name="patientDetails"
+						type="tns:patientDetails" />
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="admitPatientRequest">
+				<xsd:sequence>
+					<xsd:element name="patientId" type="xsd:string" />
+					<xsd:element name="patientDetails"
+						type="tns:patientDetails" />
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="admitPatientResponse">
+				<xsd:sequence>
+					<xsd:element name="result" type="xsd:boolean" />
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:element name="checkPatientRequest"
+				type="tns:checkPatientRequest" />
+			<xsd:element name="checkPatientResponse"
+				type="tns:checkPatientResponse" />
+			<xsd:element name="admitPatientRequest"
+				type="tns:admitPatientRequest" />
+			<xsd:element name="admitPatientResponse"
+				type="tns:admitPatientResponse" />
+
+		</xsd:schema>
+
+	</wsdl:types>
+
+
+	<wsdl:message name="checkPatientRequest">
+		<wsdl:part element="tns:checkPatientRequest"
+			name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="checkPatientResponse">
+		<wsdl:part element="tns:checkPatientResponse"
+			name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="admitPatientRequest">
+		<wsdl:part element="tns:admitPatientRequest"
+			name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="admitPatientResponse">
+		<wsdl:part element="tns:admitPatientResponse"
+			name="parameters" />
+	</wsdl:message>
+
+
+	<wsdl:portType name="PatientManagementPortType">
+
+		<wsdl:operation name="checkPatient">
+			<wsdl:input message="tns:checkPatientRequest"
+				name="checkPatientRequest" />
+			<wsdl:output message="tns:checkPatientResponse"
+				name="checkPatientResponse" />
+		</wsdl:operation>
+
+		<wsdl:operation name="admitPatient">
+			<wsdl:input message="tns:admitPatientRequest"
+				name="admitPatientRequest" />
+			<wsdl:output message="tns:admitPatientResponse"
+				name="admitPatientResponse" />
+		</wsdl:operation>
+
+	</wsdl:portType>
+
+
+	<wsdl:binding name="PatientManagementServiceSoapBinding"
+		type="tns:PatientManagementPortType">
+		
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+			
+		<wsdl:operation name="checkPatient">
+			<soap:operation
+				soapAction="http://www.example.org/PatientManagement/NewOperation" />
+			<wsdl:input name="checkPatientRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="checkPatientResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="admitPatient">
+			<soap:operation
+				soapAction="http://www.example.org/PatientManagement/NewOperation" />
+			<wsdl:input name="admitPatientRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="admitPatientResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		
+	</wsdl:binding>
+	
+	
+	<wsdl:service name="PatientManagement">
+		<wsdl:port binding="tns:PatientManagementServiceSoapBinding"
+			name="PatientManagementPort">
+			<soap:address location="http://localhost:8080/patientservicewsdlfirstws/services/patientManagementService" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

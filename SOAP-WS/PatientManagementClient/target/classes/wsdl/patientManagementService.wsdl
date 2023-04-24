@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://demo.example.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:ns1="http://www.example.org/PatientManagement/" name="PatientManagementWsImplService" targetNamespace="http://demo.example.com/">
+  <wsdl:import location="http://localhost:8080/patientservicews/patientmanagementservice?wsdl=PatientManagementPortType.wsdl" namespace="http://www.example.org/PatientManagement/">
+    </wsdl:import>
+  <wsdl:binding name="PatientManagementWsImplServiceSoapBinding" type="ns1:PatientManagementPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="checkPatient">
+      <soap:operation soapAction="http://www.example.org/PatientManagement/NewOperation" style="document"/>
+      <wsdl:input name="checkPatient">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="checkPatientResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="admitPatient">
+      <soap:operation soapAction="http://www.example.org/PatientManagement/NewOperation" style="document"/>
+      <wsdl:input name="admitPatient">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="admitPatientResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PatientManagementWsImplService">
+    <wsdl:port binding="tns:PatientManagementWsImplServiceSoapBinding" name="PatientManagementWsImplPort">
+      <soap:address location="http://localhost:8080/patientservicews/patientmanagementservice"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
